@@ -1,23 +1,42 @@
 #countdown {
   font-size: 3rem;
   font-family: "Unica One", sans-serif;
-  color: #8873a4;
+  color: #f5f2f8;
 }
 body {
-    background-color:#f7c9e3;
+  background-color: #f7c9e3;
 }
 h1 {
-    font-size: 4rem;
-    font-family: "Unica One", sans-serif;
-    color:#8873a4;
+  font-size: 4rem;
+  font-family: "Unica One", sans-serif;
+  color: #f5f2f8;
 }
 .container {
-    width: 90vw;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*progress bar*/
+#progress-container {
+  width: 400px;
+  height: 24px;
+  margin-top: 32px;
+  background: #f5f2f800;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px #e2b6c8, -5px -5px 5px #f8d9eb;
+}
+
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background-image: linear-gradient(to right, #f7f5ee 50%, #afc27e00 100%);
+  /*background: #afc27e;*/
+  transition: width 1s linear;
 }
 
 /* font library */
