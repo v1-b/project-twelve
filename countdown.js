@@ -1,50 +1,99 @@
 const countdown = document.getElementById("countdown");
+const progressBar = document.getElementById("progress-bar");
+const progressContainer = document.getElementById("progress-container");
+const nextBtn = document.getElementById("next-btn");
 
-function updateCountdown() {
+// ----------------------------
+// Load current challenge
+// ----------------------------
+
+let challenge = JSON.parse(localStorage.getItem("challenge"));
+
+if (!challenge) {
+  // First visit → join current challenge
   const now = new Date();
 
-  // Midnight at the start of July 15 (current year)
-  let target = new Date(now.getFullYear(), 6, 15, 0, 0, 0);
+  challenge = {
+    year: now.getFullYear(),
+    month: now.getMonth(),
+  };
 
-  // If we've already passed it this year, use next year
-  if (now > target) {
-    target = new Date(now.getFullYear() + 1, 6, 15, 0, 0, 0);
-  }
-
-  const diff = target - now;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-
-  countdown.textContent =
-    `${days}d ${hours}h ${minutes}m`;
+  localStorage.setItem("challenge", JSON.stringify(challenge));
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+// ----------------------------
+// Calculate dates
+// ----------------------------
 
-// Start: June 15, 2026, 00:00:00
-const start = new Date(2026, 5, 15, 0, 0, 0);
+function getDates() {
+  const start = new Date(challenge.year, challenge.month, 15, 0, 0, 0);
 
-// End: July 15, 2026, 00:00:00
-const end = new Date(2026, 6, 15, 0, 0, 0);
+  start.setMonth(start.getMonth() - 1);
 
-function updateProgressBar() {
+  const end = new Date(challenge.year, challenge.month, 15, 0, 0, 0);
+
+  return { start, end };
+}
+
+// ----------------------------
+// Update everything
+// ----------------------------
+
+function update() {
   const now = new Date();
 
-  const totalDuration = end - start;
+  const { start, end } = getDates();
+
+  const total = end - start;
+
   const elapsed = now - start;
 
-  let progress = (elapsed / totalDuration) * 100;
+  let progress = (elapsed / total) * 100;
 
-  // Clamp between 0 and 100
   progress = Math.max(0, Math.min(progress, 100));
 
-  document.getElementById("progress-bar").style.width = `${progress}%`;
-  document.getElementById("progress-text").textContent =
-    `${progress.toFixed(2)}%`;
+  progressBar.style.width = progress + "%";
+
+  //this is the live code for the countdown
+  const diff = end - now;
+
+  //this is for testing the countdown
+  //const diff = -1;
+
+  if (diff <= 0) {
+    countdown.style.display = "none";
+
+    progressContainer.style.display = "none";
+
+    nextBtn.style.display = "inline-block";
+
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+
+  const minutes = Math.floor(diff / (1000 * 60)) % 60;
+
+  countdown.textContent = `${days}d ${hours}h ${minutes}m`;
 }
 
-updateProgressBar();
-setInterval(updateProgressBar, 1000);
+update();
+
+setInterval(update, 1000);
+
+// ----------------------------
+// Next page
+// ----------------------------
+
+nextBtn.onclick = () => {
+  window.location.href = "duodecim.html";
+};
+
+//test to see whether the next button is working
+/*countdown.style.display = "none";
+progressContainer.style.display = "none";
+nextBtn.style.display = "inline-block";*/
+
+console.log(nextBtn);

@@ -23,8 +23,25 @@ h1 {
 }
 
 #senshi {
-    width: 6rem;
-    margin-bottom: 2rem;
+  width: 6rem;
+  margin-bottom: 2rem;
+}
+
+.fl-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+#fl {
+  max-width: 80%;
+}
+
+@media (max-width: 768px) {
+  #fl {
+    max-width: 80%;
+  }
 }
 
 /*progress bar*/
@@ -35,7 +52,9 @@ h1 {
   background: #f5f2f834;
   border-radius: 999px;
   overflow: hidden;
-  box-shadow: 5px 5px 5px #e2b6c8, -5px -5px 5px #f8d9eb;
+  box-shadow:
+    5px 5px 5px #e2b6c8,
+    -5px -5px 5px #f8d9eb;
 }
 
 @media (max-width: 768px) {
@@ -50,6 +69,38 @@ h1 {
   background-image: linear-gradient(to right, #f7f5ee 50%, #afc27e00 100%);
   /*background: #afc27e;*/
   transition: width 1s linear;
+}
+
+.btn-cont {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+/*next button*/
+#next-btn,
+#start-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  background: #f7f5ee 50%;
+  box-shadow:
+    5px 5px 5px #e2b6c8,
+    -5px -5px 5px #f8d9eb;
+  font-size: 2rem;
+  font-family: "Unica One", sans-serif;
+  color: #4c283e;
+  transition: 0.25s;
+}
+
+#next-btn:hover,
+#start-btn:hover {
+  transform: scale(1.05);
+}
+
+#next-btn:active,
+#start-btn:active {
+  transform: scale(0.95);
 }
 
 /* font library */
