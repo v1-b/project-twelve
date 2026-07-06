@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duodecim</title>
     <link rel="stylesheet" href="countdown.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,20 +12,18 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="favicon_frogo.ico" />
-    <title>XII</title>
   </head>
   <body>
-    <div class="container">
-      <div class="title">
-        <h1>XII</h1>
-        <img id="senshi" src="./gifs/dungeonmeshi_emotes_laios_XL.gif" alt="senshi" />
+    <div class="title">
+      <h1>XII</h1>
+      <div class="fl-cont">
+        <img id="fl" src="" alt="Fl">
       </div>
-      <div id="countdown"></div>
-      <div id="progress-container">
-        <div id="progress-bar"></div>
-      </div>
-      <button id="next-btn" style="display: none">Next</button>
     </div>
-    <script src="./scripts/countdown.js"></script>
+    <div class="btn-cont">
+      <button id="start-btn">Start Next Countdown</button>
+    </div>
+    <script src="./scripts/next.js"></script>
+    <script src="./scripts/fl.js"></script>
   </body>
 </html>

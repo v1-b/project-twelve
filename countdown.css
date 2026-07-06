@@ -35,7 +35,9 @@ h1 {
 }
 
 #fl {
-  max-width: 80%;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -66,7 +68,7 @@ h1 {
 #progress-bar {
   width: 0%;
   height: 100%;
-  background-image: linear-gradient(to right, #f7f5ee 50%, #afc27e00 100%);
+  background-image: linear-gradient(to right, #f7f5ee 90%, #afc27e00 100%);
   /*background: #afc27e;*/
   transition: width 1s linear;
 }
