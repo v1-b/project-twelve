@@ -11,9 +11,9 @@ startBtn.onclick = () => {
     challenge.year++;
   }
 
-  flowerIndex = (flowerIndex + 1) % flowers.length;
+  objIndex = (objIndex + 1) % object.length;
 
-  localStorage.setItem("flowerIndex", flowerIndex);
+  localStorage.setItem("objIndex", objIndex);
 
   localStorage.setItem("challenge", JSON.stringify(challenge));
 
