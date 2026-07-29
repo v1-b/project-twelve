@@ -4,6 +4,8 @@ const object = [
     "./images/no-3.png",
     "./images/no-4.png",
     "./images/no-5.png",
+    "./images/no-6.png",
+    "./images/no-7.png",
 ];
 
 const obj = document.getElementById("obj");
