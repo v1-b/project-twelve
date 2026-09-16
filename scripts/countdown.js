@@ -3,19 +3,31 @@ const progressBar = document.getElementById("progress-bar");
 const progressContainer = document.getElementById("progress-container");
 const nextBtn = document.getElementById("next-btn");
 
-// ----------------------------
-// Load current challenge
-// ----------------------------
+const CHALLENGE_VERSION = 2;
 
 let challenge = JSON.parse(localStorage.getItem("challenge"));
 
-if (!challenge) {
-  // First visit → join current challenge
+// Create a new challenge if there isn't one
+// OR if the saved challenge is from an older version
+if (!challenge || challenge.version !== CHALLENGE_VERSION) {
   const now = new Date();
 
+  let year = now.getFullYear();
+  let month = now.getMonth();
+
+  if (now.getDate() >= 15) {
+    month++;
+
+    if (month > 11) {
+      month = 0;
+      year++;
+    }
+  }
+
   challenge = {
-    year: now.getFullYear(),
-    month: now.getMonth(),
+    year: year,
+    month: month,
+    version: CHALLENGE_VERSION,
   };
 
   localStorage.setItem("challenge", JSON.stringify(challenge));
@@ -26,17 +38,17 @@ if (!challenge) {
 // ----------------------------
 
 function getDates() {
-  const start = new Date(challenge.year, challenge.month, 15, 0, 0, 0);
-
-  start.setMonth(start.getMonth() - 1);
-
+  // End = the 15th of the challenge month
   const end = new Date(challenge.year, challenge.month, 15, 0, 0, 0);
+
+  // Start = one month before
+  const start = new Date(challenge.year, challenge.month - 1, 15, 0, 0, 0);
 
   return { start, end };
 }
 
 // ----------------------------
-// Update everything
+// Update countdown + progress
 // ----------------------------
 
 function update() {
@@ -45,7 +57,6 @@ function update() {
   const { start, end } = getDates();
 
   const total = end - start;
-
   const elapsed = now - start;
 
   let progress = (elapsed / total) * 100;
@@ -54,17 +65,12 @@ function update() {
 
   progressBar.style.width = progress + "%";
 
-  //this is the live code for the countdown
+  // Countdown
   const diff = end - now;
-
-  //this is for testing the countdown
-  //const diff = -1;
 
   if (diff <= 0) {
     countdown.style.display = "none";
-
     progressContainer.style.display = "none";
-
     nextBtn.style.display = "inline-block";
 
     return;
@@ -97,7 +103,8 @@ progressContainer.style.display = "none";
 nextBtn.style.display = "inline-block";*/
 
 //easter egg
-    console.log(`%c
+console.log(
+  `%c
    ⠀⠀⠀⠀⠀⠀⣠⣶⢶⡲⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠑⡌⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⢣⡀⣆⠀⠘⣎⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -123,4 +130,7 @@ nextBtn.style.display = "inline-block";*/
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
    "I'm SmArT aNd iNsPEcT tHe WebSiTe"
-   %c`, "color: #ddda30;", "")
+   %c`,
+  "color: #ddda30;",
+  "",
+);
