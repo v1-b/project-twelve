@@ -7,13 +7,8 @@ startBtn.onclick = () => {
 
   if (challenge.month > 11) {
     challenge.month = 0;
-
     challenge.year++;
   }
-
-  objIndex = (objIndex + 1) % object.length;
-
-  localStorage.setItem("objIndex", objIndex);
 
   localStorage.setItem("challenge", JSON.stringify(challenge));
 
